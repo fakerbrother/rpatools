@@ -1,15 +1,28 @@
 package com.rpatools.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
 import java.io.Serializable;
-import java.util.Date;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
+ * <p>
+ * 
+ * </p>
+ *
  * @author userli19951024@gmail.com
- * @date 2021/1/11 9:54
+ * @since 2021-01-11
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
 public class Tool implements Serializable {
 
-    private static final long UUID = 2L;
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
 
     private String name;
 
@@ -19,11 +32,13 @@ public class Tool implements Serializable {
 
     private String description;
 
-    private int downloadNum;
+    private Integer downloadNum;
 
-    private int loveNum;
+    private Integer loveNum;
 
-    private Date uploadDate;
+    private LocalDateTime uploadDate;
 
     private String link;
+
+
 }
