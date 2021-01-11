@@ -1,13 +1,17 @@
 package com.rpatools.demo.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.rpatools.demo.entity.Tool;
+import com.rpatools.demo.mapper.ToolMapper;
 import com.rpatools.demo.service.ToolService;
+import com.rpatools.demo.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 /**
  * <p>
@@ -18,13 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-01-11
  */
 @RestController
-@RequestMapping("/tool")
+@RequestMapping("{/rpa}")
 public class ToolController {
     @Autowired
     ToolService toolService;
 
-    @GetMapping("/{id}")
-    public Object test(@PathVariable("id") Long id) {
-        return toolService.getById(id);
+    @GetMapping("{/tools}")
+    public void findAll() {
+        List<Tool> toolList = toolService.list();
+        toolList.forEach(System.out::println);
     }
 }
