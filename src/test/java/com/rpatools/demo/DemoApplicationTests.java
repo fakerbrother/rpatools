@@ -2,7 +2,6 @@ package com.rpatools.demo;
 
 import com.rpatools.demo.entity.Tool;
 import com.rpatools.demo.mapper.ToolMapper;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

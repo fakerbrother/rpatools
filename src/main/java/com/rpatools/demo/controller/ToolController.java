@@ -3,6 +3,7 @@ package com.rpatools.demo.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Assert;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.rpatools.demo.entity.Tool;
 import com.rpatools.demo.mapper.ToolMapper;
@@ -22,14 +23,22 @@ import java.util.List;
  * @since 2021-01-11
  */
 @RestController
-@RequestMapping("{/rpa}")
+@RequestMapping("tools")
 public class ToolController {
     @Autowired
     ToolService toolService;
 
-    @GetMapping("{/tools}")
-    public void findAll() {
-        List<Tool> toolList = toolService.list();
-        toolList.forEach(System.out::println);
+    @GetMapping(value="all")
+    public Result list(@RequestParam(defaultValue = "1") Integer currentPage) {
+//        System.out.println("enter list search");
+        Page<Tool> page = new Page<>(currentPage, 5);
+        IPage<Tool> pageData = toolService.page(page, new QueryWrapper<Tool>().orderByDesc("upload_date"));
+        return Result.success(pageData);
+    }
+
+    @GetMapping("/{id}")
+    public Object test(@PathVariable(name = "id") Long id) {
+        return toolService.getById(id);
+
     }
 }
